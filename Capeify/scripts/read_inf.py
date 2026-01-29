@@ -54,15 +54,30 @@ def read_reg(path, reg_sect):
     in_reg = False
     with open(path, "r") as f:
         for line in f.readlines():
-            if in_reg and line.strip() != "":
-                read_csv = csv.reader([line.strip()])
+            stripped = line.strip()
+            
+            if in_reg and stripped != "" and not stripped.startswith(";"):
+                read_csv = csv.reader([stripped])
                 read_csv = next(read_csv)
                 reg_str = read_csv[-1]
 
                 curs = reg_str.split(",")
-                curs = [cur.split("\\")[-1][1:-1] for cur in curs]
+                # Handle both quoted ("pointer") and unquoted (pointer) formats
+                # Also handle escaped paths like "%10%\%CUR_DIR%\%pointer%"
+                cleaned = []
+                for cur in curs:
+                    cur = cur.strip()
+                    # Remove quotes if present
+                    if cur.startswith('"') and cur.endswith('"'):
+                        cur = cur[1:-1]
+                    # Take last component after backslash
+                    cur = cur.split("\\")[-1]
+                    # Remove surrounding % if variable reference
+                    if cur.startswith("%") and cur.endswith("%"):
+                        cur = cur[1:-1]
+                    cleaned.append(cur)
 
-                return curs
+                return cleaned
 
-            if line.strip() == f"[{reg_sect}]":
+            if stripped == f"[{reg_sect}]":
                 in_reg = True
