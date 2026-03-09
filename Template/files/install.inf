@@ -1,0 +1,35 @@
+; Right-click this file and select "Install" to apply the cursor scheme
+
+[Version]
+signature="$CHICAGO$"
+
+[DefaultInstall]
+CopyFiles = Scheme.Cur
+AddReg    = Scheme.Reg
+
+[DestinationDirs]
+Scheme.Cur = 10,"%CUR_DIR%"
+
+[Scheme.Reg]
+HKCU,"Control Panel\Cursors\Schemes","%SCHEME_NAME%",,"%10%\%CUR_DIR%\%NORMAL%,%10%\%CUR_DIR%\%HELP%,%10%\%CUR_DIR%\%WORKING%,%10%\%CUR_DIR%\%BUSY%,%10%\%CUR_DIR%\%PRECISION%,%10%\%CUR_DIR%\%TEXT%,%10%\%CUR_DIR%\%HANDWRITING%,%10%\%CUR_DIR%\%UNAVAILABLE%,%10%\%CUR_DIR%\%VERTICAL%,%10%\%CUR_DIR%\%HORIZONTAL%,%10%\%CUR_DIR%\%DIAGONAL1%,%10%\%CUR_DIR%\%DIAGONAL2%,%10%\%CUR_DIR%\%MOVE%,%10%\%CUR_DIR%\%ALTERNATE%,%10%\%CUR_DIR%\%LINK%,%10%\%CUR_DIR%\%PERSON%,%10%\%CUR_DIR%\%PIN%"
+
+[Strings]
+SCHEME_NAME="Hans"
+CUR_DIR="Cursors\Hans"
+NORMAL="Normal.ani"
+HELP="Help.ani"
+WORKING="Working.ani"
+BUSY="Busy.ani"
+PRECISION="Precision.ani"
+TEXT="Text.ani"
+HANDWRITING="Handwriting.ani"
+UNAVAILABLE="Unavailable.ani"
+VERTICAL="Vertical.ani"
+HORIZONTAL="Horizontal.ani"
+DIAGONAL1="Diagonal1.ani"
+DIAGONAL2="Diagonal2.ani"
+MOVE="Move.ani"
+ALTERNATE="Alternate.ani"
+LINK="Link.ani"
+PERSON="Person.cur"
+PIN="Pin.cur"

@@ -1,0 +1,4 @@
+*.ani
+*.cur
+*.cape
+__pycache__/

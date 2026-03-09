@@ -17,12 +17,17 @@ import argparse
 from time import time
 
 win2mac_cur = {
-    0: ["com.apple.coregraphics.Arrow"],
+    0: ["com.apple.coregraphics.Arrow",
+        "com.apple.cursor.arrow",
+        "com.apple.cursor.0",
+    ],
     1: ["com.apple.cursor.40"],
     2: ["com.apple.cursor.4"],
     3: ["com.apple.coregraphics.Wait"],
     4: ["com.apple.cursor.7", "com.apple.cursor.8", "com.apple.cursor.41"],
-    5: ["com.apple.coregraphics.IBeam"],
+    5: ["com.apple.coregraphics.IBeam",
+        "com.apple.cursor.IBeam",
+        "com.apple.cursor.1",],
     6: None,
     7: ["com.apple.cursor.3"],
     8: [
@@ -77,7 +82,13 @@ def convert(args):
                 hs_x, hs_y = c_get_hotspot.get_hotspot(path)
                 w, h = c_get_size.get_size(data)
 
+                scale = 32 / w  # or 32 / h, assuming square
+                hs_x = int(hs_x * scale)
+                hs_y = int(hs_y * scale)
+                w, h = 32, 32
+
                 for cur_name in win2mac_cur[idx]:
+                    print(f"DEBUG: {cur_name} | size={w}x{h} | hotspot=({hs_x},{hs_y}) | data_len={len(data_enc)}")
                     cursors.append(
                         create_xml.create_cursor(
                             cur_name,
@@ -106,7 +117,13 @@ def convert(args):
                 frame_dur = a_get_frame_duration.get_frame_duration(path)
                 frame_dur = (frame_dur * real_frame_count) / lowered_frame_count
 
+                scale = 35 / w  # or 32 / h, assuming square
+                hs_x = int(hs_x * scale)
+                hs_y = int(hs_y * scale)
+                w, h = 35, 35
+
                 for cur_name in win2mac_cur[idx]:
+                    print(f"DEBUG: {cur_name} | size={w}x{h} | hotspot=({hs_x},{hs_y}) | data_len={len(data_enc)}")
                     cursors.append(
                         create_xml.create_cursor(
                             cur_name,
@@ -165,3 +182,6 @@ def main():
         args.func(args)
     else:
         parser.print_help()
+
+if __name__ == "__main__":
+    main()
