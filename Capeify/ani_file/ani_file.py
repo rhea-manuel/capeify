@@ -1,4 +1,4 @@
-from chunk import Chunk
+from Capeify.ani_file.chunk import Chunk
 
 # from PIL import Image
 from pathlib import Path

@@ -32,7 +32,7 @@ pip install capeify
 # How to use it
 To convert a Windows cursor pack , run :
 ```
-capeify convert --path PATH/TO/THE/CURSORPACK --inf-file INF_FILE_NAME --out OUT_FILE_PATH
+python3 -m Capeify.main convert --path PATH/TO/THE/CURSORPACK --inf-file INF_FILE_NAME --out OUT_FILE_PATH
 ```
 
 # How it works

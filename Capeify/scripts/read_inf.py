@@ -55,7 +55,7 @@ def read_reg(path, reg_sect):
     with open(path, "r") as f:
         for line in f.readlines():
             stripped = line.strip()
-            
+
             if in_reg and stripped != "" and not stripped.startswith(";"):
                 read_csv = csv.reader([stripped])
                 read_csv = next(read_csv)

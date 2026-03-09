@@ -5,22 +5,25 @@ from io import BytesIO
 from PIL import Image
 
 
-def convert2pngs(file):
+from Capeify.ani_file import ani_file
+from io import BytesIO
+from PIL import Image
+
+def convert2pngs(file, target_size=35):
     ani = ani_file.open(file, "r")
-
     curs = ani.getframesdata()
-
     pngs = []
     for cur in curs:
-        with WImage(blob=cur, format="cur") as img:
-            img.format = "png"
-            png_data = img.make_blob()
+        buf = BytesIO(cur)
+        buf.name = "cursor.ico"
+        img = Image.open(buf)
+        img = img.resize((target_size, target_size), Image.NEAREST)
 
-        png_data = BytesIO(png_data)
-        pngs.append(png_data)
-
+        out = BytesIO()
+        img.save(out, format="PNG")
+        out.seek(0)
+        pngs.append(out)
     return pngs
-
 
 def convert2png(file, pngs):
     ani = ani_file.open(file)
